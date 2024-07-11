@@ -1,7 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-public class Main  {
+
+public class Main {
     private static JTextField textField;
     private static double currentResult = 0;
     private static String currentOperator = "";
@@ -12,29 +13,55 @@ public class Main  {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500, 500);
 
-
         // Create the main panel with GridBagLayout
         JPanel mainPanel = new JPanel(new GridBagLayout());
         mainPanel.setBackground(Color.BLACK);
         GridBagConstraints gbc = new GridBagConstraints();
 
         // Create and configure the text field
-        JTextField textField = new JTextField();
+        textField = new JTextField();
         textField.setEditable(false);
         textField.setHorizontalAlignment(JTextField.RIGHT); // Optional: align text to the right
 
         // Add the text field to the main panel with GridBagConstraints
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.gridwidth = 1;
+        gbc.gridwidth = 2;
         gbc.gridheight = 1;
         gbc.weightx = 1.0;
-        gbc.weighty = 0.2; // Adjust this value to change the height proportion of the text field
+        gbc.weighty = 0.1; // Adjust this value to change the height proportion of the text field
         gbc.fill = GridBagConstraints.BOTH;
         gbc.insets = new Insets(5, 5, 5, 5); // Optional: add some padding around the text field
         mainPanel.add(textField, gbc);
 
-        // Create the buttons
+        // Create the Clear button
+        JButton clear = new JButton("C"); // Clear button
+
+// Add an empty panel to fill the left 80%
+        JPanel fillerPanel = new JPanel();
+        fillerPanel.setBackground(Color.BLACK);
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridwidth = 1; // Only 1 column
+        gbc.weightx = 0.8; // 80% of the width
+        gbc.weighty = 0.1; // Same height proportion as the clear button
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.insets = new Insets(5, 5, 5, 5); // Optional: add some padding
+        mainPanel.add(fillerPanel, gbc);
+
+// Add the Clear button to the main panel with GridBagConstraints
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.gridwidth = 1; // Only 1 column
+        gbc.weightx = 0.2; // 20% of the width
+        gbc.weighty = 0.1; // Adjust this value to change the height proportion of the clear button
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.insets = new Insets(5, 5, 5, 5); // Optional: add some padding around the clear button
+        mainPanel.add(clear, gbc);
+
+
+
+
         JButton button0 = new JButton("0");
         JButton button1 = new JButton("1");
         JButton button2 = new JButton("2");
@@ -48,14 +75,13 @@ public class Main  {
         JButton plus = new JButton("+");
         JButton minus = new JButton("-");
         JButton divide = new JButton("/");
-        JButton multiply = new JButton("*");
+        JButton multiply = new JButton("X");
         JButton equal = new JButton("=");
         JButton decimal = new JButton(".");
-        JButton clear = new JButton("C");
 
-        // Create a panel with GridLayout for the buttons
-        JPanel buttonPanel = new JPanel(new GridLayout(5, 4, 5, 5));
-        buttonPanel.setBackground(Color.black);
+
+        JPanel buttonPanel = new JPanel(new GridLayout(4, 4, 5, 5));
+        buttonPanel.setBackground(Color.BLACK);
         buttonPanel.add(button7);
         buttonPanel.add(button8);
         buttonPanel.add(button9);
@@ -76,16 +102,15 @@ public class Main  {
         buttonPanel.add(decimal);
         buttonPanel.add(plus);
 
-        buttonPanel.add(clear);
-
         // Add the button panel to the main panel with GridBagConstraints
         gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.gridwidth = 1;
+        gbc.gridy = 2;
+        gbc.gridwidth = 2;
         gbc.gridheight = 1;
         gbc.weightx = 1.0;
         gbc.weighty = 0.8; // Adjust this value to change the height proportion of the button panel
         gbc.fill = GridBagConstraints.BOTH;
+        gbc.insets = new Insets(5, 5, 5, 5); // Optional: add some padding around the button panel
         mainPanel.add(buttonPanel, gbc);
 
         // Add the main panel to the frame
@@ -110,13 +135,13 @@ public class Main  {
                     textField.setText("" + currentResult);
                     currentOperator = "";
                     startNewNumber = true;
-                }else if (command.equals("C")) {
+                } else if (command.equals("C")) {
                     // Handle clear button
                     textField.setText("");
                     currentResult = 0;
                     currentOperator = "";
                     startNewNumber = true;
-                }  else {
+                } else {
                     if (!currentOperator.equals("")) {
                         calculate(Double.parseDouble(textField.getText()));
                         textField.setText("" + currentResult);
@@ -130,15 +155,16 @@ public class Main  {
         };
 
         JButton[] buttons = {button0, button1, button2, button3, button4, button5, button6, button7, button8, button9,
-                plus, minus, divide, multiply, equal, decimal};
+                plus, minus, divide, multiply, equal, decimal, clear};
         for (JButton button : buttons) {
-            button.setFocusable(false);
             button.addActionListener(listener);
+            button.setFocusable(false);
         }
 
         // Make the frame visible
         frame.setVisible(true);
     }
+
     private static void calculate(double number) {
         switch (currentOperator) {
             case "+":
@@ -154,5 +180,5 @@ public class Main  {
                 currentResult /= number;
                 break;
         }
-
-}}
+    }
+}
