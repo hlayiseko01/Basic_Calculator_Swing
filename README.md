@@ -26,7 +26,7 @@ Easy to run — plug and play
 
 ##Project Setup / Running👨‍🔧
 1. Clone the repository:
-git clone<https://github.com/hlayiseko01/Basic_Calculator_Swing>
+git clone< https://github.com/hlayiseko01/Basic_Calculator_Swing >
 
 2. Open the project in your Java IDE (IntelliJ, Eclipse, etc.)
 
