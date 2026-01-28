@@ -35,4 +35,7 @@ git clone< https://github.com/hlayiseko01/Basic_Calculator_Swing >
 
 4. The calculator window will appear and is ready to use
 
-Developed by **Bennet Hlayiseko Ramolefo**  
+---
+Developed by [Bennet Hlayiseko Ramolefo](https://www.linkedin.com/in/bennet-hlayiseko-ramolefo)  
+Software Developer based in South Africa (Tzaneen).  
+[Check out my GitHub](https://github.com/hlayiseko01) 
